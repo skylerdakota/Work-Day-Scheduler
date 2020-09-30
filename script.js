@@ -1,56 +1,52 @@
-// Set variables to traverse the DOM and select by ID and Class
-var dateLocation = $("#currentDay")
-var currentTimeBlock = $(".hour")
-var now = moment();
-var hour = 
-var date = "Tuesday"
-
-moment().format();
-// a way to iterate through the timeblocks and determine if it is that time
-//jquery grab elements that have times in the blocks
-function checkHour(){
-
-    if (".hour" === now){
-        textarea.attr("class", ".present");
-        textarea.removeAttr("class", ".future");
-        textarea.removeAttr("class", ".past");
-    } else if (".hour" !== now || ".hour" < now){
-        textarea.attr("class", ".past");
-        textarea.removeAttr("class", ".present");
-        textarea.removeAttr("class", ".future");
-    } else{
-        textarea.attr("class", ".future");
-        textarea.removeAttr("class", ".present");
-        textarea.removeAttr("class", ".past");
-    };
-};
-
-//a way to parse out the hour only to match the current hour?
-
-
-
-// add date only to top of calendar app
-function checkDate(){
+$(document).ready(function(){
+    // adds date to top of calendar app using the moment.js library tool and connecting to the id in the HTML
+    var date = moment().format('dddd Do, YYYY');
     $("#currentDay").text(date);
-};  
+    
+// uses onclick event to store saved textarea inputs in local storage    
+$(".saveBtn").on("click", function(){
+    var activity = $(this).siblings(".description").val();
+    var hour = $(this).parent().attr("id");
+    localStorage.setItem(hour, activity);
+    console.log(localStorage);
+})
 
-// event listener and if statement to recognize if an activity is in the past, present or future, 
-//adding and removing classes to respond by changing block colors to indicate time to user
-// (no need for event listener here) $(now).on("", function () {});
-  
+// gets textarea input values by class and id to store in local storage 
+$("#hour-9 .description").val(localStorage.getItem("hour-9"))
+$("#hour-10 .description").val(localStorage.getItem("hour-10"))
+$("#hour-11 .description").val(localStorage.getItem("hour-11"))
+$("#hour-12 .description").val(localStorage.getItem("hour-12"))
+$("#hour-13 .description").val(localStorage.getItem("hour-13"))
+$("#hour-14 .description").val(localStorage.getItem("hour-14"))
+$("#hour-15 .description").val(localStorage.getItem("hour-15"))
+$("#hour-16 .description").val(localStorage.getItem("hour-16"))
+$("#hour-17 .description").val(localStorage.getItem("hour-17"))
 
+// a way to iterate through the timeblocks and determine if it is that time
+// jquery grabs elements that have times in the blocks
+function checkHour(){
+    // sets a variable to the current time function
+    var currentHour =  moment().hours();
+    console.log(currentHour);
+    // uses a for each loop to iterate over all timeblocks and split the id in order to create a comparison with the current hour
+    $(".row").each(function(){
+        var ourHour = parseInt($(this).attr("id").split("-")[1]);
+        console.log(ourHour);
+        // checks a series of conditions using an if/else statement to then add or remove classes to render color on the timeblocks 
+        if (ourHour < currentHour){
+            $(this).addClass("past");
+        }else if (ourHour === currentHour){
+            $(this).removeClass("past");
+            $(this).addClass("present");
+        }else{
+            $(this).removeClass("past");
+            $(this).removeClass("present");
+            $(this).addClass("future");
+        }
 
-// on click event to save input activities to local storage
-$(".save").on("click", function() { 
-
-});
-
-// -- stores in local storage updates the dom to store keys and values
-
+    })
+};
+// Calls checkHour function immediately to determine how to render page to user
 checkHour();
 
-//Office hour questions:
-// why are there gaps between bars?
-// how do I get rid of border outline on time block?
-// how do I get an input box to remain color when typing in it?
-// Is my pseudo code headed in the right direction?
+})
