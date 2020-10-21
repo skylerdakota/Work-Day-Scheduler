@@ -46,5 +46,12 @@ The following animation demonstrates the application functionality:
 
 ![day planner demo](./Assets/05-third-party-apis-homework-demo.gif)
 
+
+## Contact
+
+Skyler Dakota Lawton
+
+skylerdakota@gmail.com
+
 - - -
 © 2020 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
