@@ -1,6 +1,6 @@
 # Work-Day-Scheduler
 
-[Site](https://skylerdakota.github.io/Work-Day-Scheduler/)
+[Work Day Scheduler](https://skylerdakota.github.io/Work-Day-Scheduler/)
 
 ![Main Page](Assets/scheduler.png)
 
